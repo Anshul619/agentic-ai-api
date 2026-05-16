@@ -42,13 +42,13 @@ source .venv/bin/activate
 ## Install dependencies
 
 ````shell
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ````
 
 ## Run the script
 
 ````shell
-python main.py
+python3 main.py
 ````
 
 ## Example Run
@@ -57,14 +57,18 @@ python main.py
 Enter text to translate: hello!
 Enter target language: Italian
 Translation: Ciao!
+Back to English: Hello!
+Saved to: /path/to/data/latest_translation.json
 ````
 
 # Overall Flow
 - Load API key and model from .env.
-- Create a prompt template and a Gemini LLM instance.
-- Chain them into a RunnableSequence.
+- Create forward and reverse prompt templates and a shared Gemini LLM instance.
+- Chain them into a round-trip RunnableSequence with `RunnablePassthrough.assign`.
 - Take input from the user: source_text + target_language.
-- Format the prompt with those inputs.
-- Send prompt to Gemini via API.
-- Receive the translation.
-- Print the translation to the terminal.
+- Forward step: format the prompt (English → target language) and send to Gemini.
+- Assign the translation to `translated`.
+- Back step: format the reverse prompt (target language → English) and send to Gemini.
+- Assign the result to `back_to_english`.
+- Print both the forward translation and the English round-trip to the terminal.
+- Persist results with LangChain `LocalFileStore` (`data/latest_translation.json` by default; override with `OUTPUT_DIR`).
