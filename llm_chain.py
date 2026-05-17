@@ -35,7 +35,7 @@ from file_store import save_translation_runnable
 from prompts import get_translate_prompt, get_translate_to_english_prompt
 
 
-def _make_llm():
+def make_llm():
     model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
     api_key = os.getenv("GEMINI_API_KEY")
 
@@ -49,14 +49,18 @@ def _make_llm():
     )
 
 
+def _make_llm():
+    return make_llm()
+
+
 def make_runnable():
-    llm = _make_llm()
+    llm = make_llm()
     # Single-step chain: template → Gemini → string
     return get_translate_prompt() | llm | StrOutputParser()
 
 
 def make_roundtrip_runnable():
-    llm = _make_llm()
+    llm = make_llm()
 
     # Subchains: each is prompt | llm | StrOutputParser (dict in → str out)
     forward = get_translate_prompt() | llm | StrOutputParser()
