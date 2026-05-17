@@ -1,0 +1,25 @@
+flowchart TD
+    start([Start])
+    input[/Input: text, language/]
+    translate[translate node\nEnglish -> target language]
+    decision{language == Italian?}
+    show[Return translated output]
+    translate_back[translate_back node\nTarget language -> English]
+    save[save node\nWrite latest_translation.json]
+    end_node([End])
+
+    start --> input
+    input --> translate
+    translate --> decision
+    decision -- No --> show
+    show --> end_node
+    decision -- Yes --> translate_back
+    translate_back --> save
+    save --> end_node
+
+    llm[(Google GenAI)]
+    storage[(Filesystem)]
+
+    translate -. prompt + invoke .-> llm
+    translate_back -. prompt + invoke .-> llm
+    save --> storage
