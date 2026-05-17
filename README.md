@@ -51,6 +51,12 @@ pip3 install -r requirements.txt
 python3 main.py
 ````
 
+## Run the LangGraph demo
+
+````shell
+python3 main_langgraph.py
+````
+
 ## Example Run
 
 ````
@@ -72,3 +78,11 @@ Saved to: /path/to/data/latest_translation.json
 - Assign the result to `back_to_english`.
 - Print both the forward translation and the English round-trip to the terminal.
 - Persist results with LangChain `LocalFileStore` (`data/latest_translation.json` by default; override with `OUTPUT_DIR`).
+
+# LangGraph Demo Flow
+- Build a `StateGraph` with explicit workflow nodes instead of an LCEL runnable chain.
+- `translate` node: translate English input into the requested language.
+- Conditional branch: if the target language is Italian, continue to a round-trip path.
+- `translate_back` node: translate the Italian output back into English.
+- `save` node: persist the Italian round-trip result to `data/latest_translation.json`.
+- For any non-Italian language, the graph ends after the first translation.
