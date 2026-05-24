@@ -1,0 +1,18 @@
+[
+  {
+    "question": "What is Redis?",
+    "expected_keywords": [
+      "memory",
+      "cache",
+      "key-value"
+    ]
+  },
+  {
+    "question": "What is LangGraph?",
+    "expected_keywords": [
+      "workflow",
+      "state",
+      "agent"
+    ]
+  }
+]

@@ -21,9 +21,21 @@ workflow.add_node(
     load_memory_node
 )
 
+# workflow.add_node(
+#     "chat",
+#     chat_node
+# )
+
+from app.observability.tracing.node_wrapper import (
+    traced_node
+)
+
 workflow.add_node(
     "chat",
-    chat_node
+    traced_node(
+        "chat",
+        chat_node
+    )
 )
 
 workflow.add_node(

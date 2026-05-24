@@ -60,3 +60,31 @@ curl -N -X POST http://localhost:8000/api/v1/chat/stream \
   "message": "Explain LangGraph"
 }'
 ```
+
+## Run eval
+
+```shell
+python -m app.evaluation.run_eval
+```
+
+## What to track in AI Observability?
+
+
+```
+How long did planner node take?
+How many retries occurred?
+Which provider failed?
+What was token cost?
+Which tool was selected?
+
+workflow_id
+session_id
+node_name
+start_time
+end_time
+duration
+tokens
+provider
+status
+error
+```
