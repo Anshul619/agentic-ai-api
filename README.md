@@ -1,3 +1,23 @@
+
+# Agentic AI API
+
+Production-grade multi-agent orchestration platform with:
+- LangGraph workflows
+- Streaming APIs
+- Provider abstraction
+- Durable execution
+- Memory layer
+- Observability
+- Multi-agent orchestration
+
+# Stack
+- FastAPI
+- LangGraph
+- Redis
+- PostgreSQL
+- OpenTelemetry
+- Docker
+
 # Quick start
 
 ## Git Clone
@@ -67,16 +87,17 @@ curl -N -X POST http://localhost:8000/api/v1/chat/stream \
 python -m app.evaluation.run_eval
 ```
 
-## What to track in AI Observability?
+# What to track in AI-Observability?
 
+- How long did planner node take?
+- How many retries occurred?
+- Which provider failed?
+- What was token cost?
+- Which tool was selected?
+
+## AI-Observability Attributes
 
 ```
-How long did planner node take?
-How many retries occurred?
-Which provider failed?
-What was token cost?
-Which tool was selected?
-
 workflow_id
 session_id
 node_name
