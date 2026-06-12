@@ -60,7 +60,7 @@ docker run -p 6379:6379 redis
 uvicorn app.main:app --reload
 ```
 
-## Run the CURL
+## Run the CURLs
 
 ```shell
 curl http://localhost:8000/health

@@ -10,17 +10,31 @@ async def chat_node(state):
 
     messages.append({
         "role": "user",
-        "content": state["user_input"]
+        "parts": [
+            {
+                "text": state["user_input"]
+            }
+        ],
     })
 
-    response = await provider.chat(messages)
+    # response = await provider.chat(messages)
+
+    result = await provider.generate_with_tools(
+        messages
+    )
 
     messages.append({
-        "role": "assistant",
-        "content": response
+        "role": "model",
+        "parts": [
+            {
+                "text": result["response"]
+            }
+        ],
     })
 
     state["messages"] = messages
-    state["response"] = response
+    state["response"] = result["response"]
+    state["tool_calls"] = result["tool_calls"]
+    state["retrieved_docs"] = result["retrieved_docs"]
 
     return state

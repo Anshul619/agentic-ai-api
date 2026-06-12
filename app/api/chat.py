@@ -21,7 +21,15 @@ async def chat(payload: dict):
     })
 
     return {
-        "response": result["response"]
+        "response": result["response"],
+        "tool_calls": result.get(
+            "tool_calls",
+            [],
+        ),
+        "evaluation": result.get(
+            "evaluation",
+            {},
+        ),
     }
 
 provider = GeminiProvider()
